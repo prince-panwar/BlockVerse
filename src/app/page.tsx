@@ -6,7 +6,9 @@ export default function Home() {
     <>
   <ThemeSwitcher /> 
   <div className=' flex items-center justify-center h-screen'>
-
+ Prince
+ hello
+ done
   </div>
   </>
   )
