@@ -9,10 +9,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <NextUiProvider>
-      <body >{children}</body>
+   <html lang="en">
+     <body>
+      <NextUiProvider> 
+          {children}
       </NextUiProvider>
+      </body>
     </html>
+ 
   )
 }
