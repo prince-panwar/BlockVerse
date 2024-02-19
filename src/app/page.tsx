@@ -7,7 +7,7 @@ export default function Home() {
     <>
 
   <div className=' flex items-center justify-center h-screen'>
- Arpit
+ GAURAVE
   </div>
   </>
   )
