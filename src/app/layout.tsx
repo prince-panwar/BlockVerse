@@ -1,7 +1,7 @@
 "use client"
 import './globals.css'
 
-import { NextUIProvider } from '@nextui-org/react'
+import NextUiProvider from "./providers/NextUiProvider";
 
 export default function RootLayout({
   children,
@@ -10,9 +10,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <NextUIProvider>
+      <NextUiProvider>
       <body >{children}</body>
-      </NextUIProvider>
+      </NextUiProvider>
     </html>
   )
 }
