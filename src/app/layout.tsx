@@ -1,6 +1,6 @@
 "use client"
+import Nav from './components/Navbar/Navbar';
 import './globals.css'
-
 import NextUiProvider from "./providers/NextUiProvider";
 
 export default function RootLayout({
@@ -12,6 +12,7 @@ export default function RootLayout({
    <html lang="en">
      <body>
       <NextUiProvider> 
+        <Nav/>
           {children}
       </NextUiProvider>
       </body>
