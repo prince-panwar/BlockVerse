@@ -1,59 +1,55 @@
 "use client"
-import React from 'react'
-
+import React ,{useEffect, useState}from 'react'
+import axios from 'axios';
 import './Middle.css';
 import  VideoCard  from "../Cards/VideoCard"
+import 'dotenv/config';
+
+
 function Middle() {
-    const cards = [
-        {
-          id: 1,
-          title: 'One Piece',
-          price: '$100',
-          des: 'King of the priates',
-          imageUrl: 'https://wallpapercave.com/wp/wp8300141.jpg',
-        },
-        {
-          id: 2,
-          title: 'Naruto',
-          price: '$80',
-          des: 'Hokage of Hidden Leaf Village',
-          imageUrl: 'https://www.commonsensemedia.org/sites/default/files/styles/ratio_2_3_xlarge/public/product-images/csm-tv/naruto-shippuden-poster.jpg',
-        },
-        {
-            id: 3,
-            title: 'Solo Leveling',
-            price: '$95',
-            des: 'From weakest to strongest',
-            imageUrl: 'https://otakukart.com/wp-content/uploads/2022/07/Solo-Leveling.jpg',
-          },
-          {
-            id: 4,
-            title: 'Dragon Ball',
-            price: '$70',
-            des: 'Saiyan Warriors solos animeverse',
-            imageUrl: 'https://data1.ibtimes.co.in/en/full/575040/dragon-ball-super.jpg',
-          },
-        // Add more objects as needed
-      ];
+      const [topRatedList,setTopRatedList] = useState([]);
+      const [popularList,setPopularList] = useState([]);
+      const [upcomingList,setUpcomingList] = useState([]);
+      
+      const API = process.env.NEXT_PUBLIC_API_KEY;
+      console.log(API);
+       useEffect(() => {
+        async function fetchData() {
+          try {
+            const response = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API}`);
+            setTopRatedList(response.data.results);
+            console.log(response.data.results);
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        }
+    
+        fetchData();
+      }, []);
   return (
     <>
-    <div className="content-center">
-      <div className="heading">
-          <h2>Menu</h2>
-          <h5>Recommended</h5>
-      </div>
-      <div className="flex justify-center mt-10">
-          {cards.map(card => (
-            <VideoCard
-              key={card.id}
-              title={card.title}
-              price={card.price}
-              des={card.des}
-              imageUrl={card.imageUrl}
-            />
-          ))}
-      </div>
+   <div className="content-center">
+  <div className="flex flex-col items-center">
+    <div className="heading mb-4">
+      <h2 className="text-2xl mt-8 font-bold">Trending</h2>
     </div>
+    <div className="flex justify-center mt-8 flex-wrap">
+      {topRatedList.slice(0, 4).map(card => (
+        <VideoCard
+          key={card.id}
+          title={card.title}
+          price={card.price}
+          des={card.overview}
+          imageUrl={"https://image.tmdb.org/t/p/original"+card.poster_path}
+        />
+      ))}
+    </div>
+    <div>
+      
+    </div>
+  </div>
+</div>
+
     </>
   )
 }
