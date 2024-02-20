@@ -1,15 +1,13 @@
 
 import React from 'react'
 import ThemeSwitcher from './components/ThemeSwitcherButton'
+import MyCarousel from './components/Carousel'
 export default function Home() {
   return (
     <>
   <ThemeSwitcher /> 
-  <div className=' flex items-center justify-center h-screen'>
- Prince
- hello
- done
-  </div>
+  <MyCarousel/>
+
   </>
   )
 }
