@@ -1,7 +1,7 @@
 "use client"
 import './globals.css'
 
-import {NextUIProvider} from "@nextui-org/react";
+import NextUiProvider from "./providers/NextUiProvider";
 
 export default function RootLayout({
   children,

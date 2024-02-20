@@ -3,29 +3,29 @@ import React from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar} from "@nextui-org/react";
 import {AcmeLogo} from "./AcmeLogo.jsx";
 import {SearchIcon} from "./SearchIcon.jsx";
-
+import ThemeSwitcher from "../ThemeSwitcherButton.jsx";
 export default function Nav() {
   return (
     <Navbar isBordered>
       <NavbarContent justify="start">
         <NavbarBrand className="mr-4">
           <AcmeLogo />
-          <p className="hidden sm:block font-bold text-inherit">ACME</p>
+          <p className="hidden sm:block font-bold text-inherit">BlockVerse</p>
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-3">
-          <NavbarItem>
-            <Link color="foreground" href="#">
-              Features
-            </Link>
-          </NavbarItem>
           <NavbarItem isActive>
             <Link href="#" aria-current="page" color="secondary">
-              Customers
+              Home
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link href="#" color="foreground">
+              Trending
             </Link>
           </NavbarItem>
           <NavbarItem>
             <Link color="foreground" href="#">
-              Integrations
+              Generes
             </Link>
           </NavbarItem>
         </NavbarContent>
@@ -34,7 +34,7 @@ export default function Nav() {
       <NavbarContent as="div" className="items-center" justify="end">
         <Input
           classNames={{
-            base: "max-w-full sm:max-w-[10rem] h-10",
+            base: "max-w-full m:max-w-[20rem] h-10",
             mainWrapper: "h-full",
             input: "text-small",
             inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
@@ -72,6 +72,7 @@ export default function Nav() {
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
+        <ThemeSwitcher/>
       </NavbarContent>
     </Navbar>
   );
