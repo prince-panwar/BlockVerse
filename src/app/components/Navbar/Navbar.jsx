@@ -8,8 +8,8 @@ import ThemeSwitcher from "../ThemeSwitcherButton.jsx";
 
 export default function Nav() {
   return (
-    <div className="absolute top-0 left-0 w-full z-10 ">
-      <Navbar > 
+    <div className="absolute top-0 left-0 w-full z-10  ">
+      <Navbar isBlurred="false" className="bg-transparent" > 
         <NavbarContent justify="start">
           <NavbarBrand className="mr-4">
             <AcmeLogo />
