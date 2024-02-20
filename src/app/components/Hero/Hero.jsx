@@ -4,7 +4,7 @@ import MyCarousel from '../Carousal/Carousal'
 export default function Hero() {
   return (
     <div>
-        <Nav />
+        
         <MyCarousel />
       
     </div>

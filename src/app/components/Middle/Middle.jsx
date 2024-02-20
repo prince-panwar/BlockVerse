@@ -1,7 +1,6 @@
 "use client"
 import React ,{useEffect, useState}from 'react'
 import axios from 'axios';
-import './Middle.css';
 import  VideoCard  from "../Cards/VideoCard"
 import 'dotenv/config';
 
@@ -37,6 +36,7 @@ function Middle() {
       {topRatedList.slice(0, 4).map(card => (
         <VideoCard
           key={card.id}
+          id={card.id}
           title={card.title}
           price={card.price}
           des={card.overview}

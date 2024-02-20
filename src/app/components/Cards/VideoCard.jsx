@@ -1,12 +1,18 @@
 import React from 'react'
+import { useRouter } from 'next/Navigation';
 import {Card, CardHeader, CardBody, Image} from "@nextui-org/react";
 
-export default function VideoCard({title,price,des,imageUrl}) {
+export default function VideoCard({id ,title,price,des,imageUrl}) {
+  const router = useRouter();
+  const handlePress = () => {
+    console.log(id);
+    router.push(`/${id}`);
+  }
   return (
     <div>
-      <Card isPressable="true" className="py-4 h-80 w-90 mr-10">
+      <Card isPressable="true" onPress={() => handlePress()} className="py-4 h-80 w-90 mr-10">
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-          <p className="text-xs uppercase font-medium font-bold">{title}</p>
+          <p className="text-xs uppercase  font-bold">{title}</p>
           <small className="text-default-500">{price}</small>
          
         </CardHeader>
