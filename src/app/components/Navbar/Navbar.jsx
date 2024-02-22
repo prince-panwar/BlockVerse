@@ -4,8 +4,7 @@ import React from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar } from "@nextui-org/react";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { SearchIcon } from "./SearchIcon.jsx";
-import ThemeSwitcher from "../ThemeSwitcherButton.jsx";
-
+import ThemeSwitcher from "../ThemeSwitcherButton.jsx
 export default function Nav() {
   return (
     <div className="absolute top-0 left-0 w-full z-10  ">

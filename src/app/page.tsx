@@ -2,7 +2,7 @@
 import React from 'react'
 import Hero from './components/Hero/Hero'
 import Middle from  "./components/Middle/Middle"
-import InfoPage from './[id]/page'
+import InfoPage from './Info/[id]/page'
 export default function Home() {
   return (
     <>

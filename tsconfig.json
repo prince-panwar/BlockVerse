@@ -34,7 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "src/app/components/ThemeSwitcherButton.jsx"  ],
+, "src/app/components/ThemeSwitcherButton.jsx", "src/app/More/[more]/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -43,7 +43,7 @@ export default function MyCarousel() {
   }, []);
 
   return (
-    <div className="relative overflow-hidden w-full min-h-[400px] bg-white rounded-lg">
+    <div className="relative overflow-hidden w-full min-h-[450px] bg-white rounded-lg">
     <div className="carousel-body absolute top-0 bottom-0 start-0 flex flex-row transition-transform duration-700 opacity-100" ref={carouselRef}>
       <div className="carousel-slide w-full h-full object-scale-down flex-none active relative">
         <img className="w-full h-full object-cover object-top" src="https://blogs-images.forbes.com/erikkain/files/2017/11/justice-league.jpg" alt="First slide" />
