@@ -1,6 +1,6 @@
 "use client"
 import React, {useState, useEffect} from 'react';
-import { useRouter } from 'next/router';
+
 import VideoCard from '../../components/Cards/VideoCard';
 import axios from 'axios';
 import Nav from '@/app/components/Navbar/Navbar';
