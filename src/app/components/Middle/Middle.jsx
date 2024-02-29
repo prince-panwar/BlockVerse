@@ -72,7 +72,7 @@ function Middle({ searchQuery }) {
   return (
     <>
       {/* Render spinner if searchQuery is present and searchResponse is pending */}
-      {searchQuery && loading && <Spinner />}
+      {searchQuery && loading && <div className='flex items-center justify-center mt-8'><Spinner  /></div>}
 
       {/* Render search results if searchQuery is present and searchResponse is available */}
       {searchQuery && !loading && searchData.length > 0 && (
