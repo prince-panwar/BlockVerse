@@ -1,8 +1,9 @@
 "use client"
 import React, {useState, useEffect} from 'react';
-import { useRouter } from 'next/router';
+
 import VideoCard from '../../components/Cards/VideoCard';
 import axios from 'axios';
+import Nav from '@/app/components/Navbar/Navbar';
 export default function Page({params}) {
   const [list, setList] = useState();
 
@@ -34,6 +35,8 @@ str = capitalizeFirstLetter(str);
 
 
   return (
+    <>
+    <Nav/>
     <div className="flex flex-col items-center mt-24">
     <div className="heading mb-4">
       <h2 className="text-2xl mt-8 font-bold">{str}</h2>
@@ -51,6 +54,8 @@ str = capitalizeFirstLetter(str);
         />
       ))}
     </div>
+
     </div>
+    </>
   );
 }

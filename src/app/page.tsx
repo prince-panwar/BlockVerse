@@ -1,13 +1,20 @@
 "use client"
-import React from 'react'
-import Hero from './components/Hero/Hero'
+import React,{useState} from 'react'
 import Middle from  "./components/Middle/Middle"
-import InfoPage from './Info/[id]/page'
+import Nav from './components/Navbar/Navbar';
+import MyCarousel from './components/Carousal/Carousal';
+
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState('');
+  function handleSearch(Q:string) {
+    //console.log(Q);
+    setSearchQuery(Q);
+  }
   return (
     <>
-     <Hero/>
-     <Middle/>
+     <Nav  handleSearch={handleSearch}/>
+     <MyCarousel />
+     <Middle searchQuery={searchQuery}/>
     </>
   )
 }

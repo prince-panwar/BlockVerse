@@ -6,31 +6,22 @@ import { AcmeLogo } from "./AcmeLogo.jsx";
 import { SearchIcon } from "./SearchIcon.jsx";
 import ThemeSwitcher from "../ThemeSwitcherButton.jsx";
 
-export default function Nav() {
-  const[searchTerm, setSearchTerm] = useState('');
-  useEffect(() => {
-    function handleEnter(event) {
-      if (event.key === 'Enter') {
-        // Perform the search operation here
-        console.log(`Searching for ${searchTerm}`);
-        const url = 'https://api.themoviedb.org/3/find/external_id?external_source=&language=${searchTerm}';
-        const options = {method: 'GET', headers: {accept: 'application/json'}};
-        
-        fetch(url, options).then(res => res.json()).then(json => console.log(json))
-        .catch(err => console.error('error:' + err));
-      }
-    }
+export default function Nav({ handleSearch }) {
+  const [searchQuery, setSearchQuery] = useState("");
 
-    window.addEventListener('keydown', handleEnter);
+  const handleChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
-    // Cleanup function to remove the event listener
-    return () => {
-      window.removeEventListener('keydown', handleEnter);
-    };
-  }, [searchTerm]);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Call handleSearch function with the searchQuery
+    handleSearch(searchQuery);
+  };
+
   return (
-    <div className="absolute top-0 left-0 w-full z-10  ">
-      <Navbar isBlurred="false" className="bg-transparent" > 
+    <div className="absolute top-0 left-0 w-full z-10">
+      <Navbar isBlurred="false" className="bg-transparent">
         <NavbarContent justify="start">
           <NavbarBrand className="mr-4">
             <AcmeLogo />
@@ -56,23 +47,24 @@ export default function Nav() {
         </NavbarContent>
 
         <NavbarContent as="div" className="items-center" justify="end">
-          <Input
-            classNames={{
-              base: "max-w-full m:max-w-[20rem] h-10",
-              mainWrapper: "h-full",
-              input: "text-small",
-              inputWrapper: "h-full font-normal text-default-200 bg-default-200/20 dark:bg-default-500/20",
-              
-            }}
-            placeholder="Type to search..."
-            size="sm"
-            startContent={<SearchIcon size={18} />}
-            type="search"
-            value={searchTerm}
-            onChange={(event) => setSearchTerm(event.target.value)}
-          />
+          <form onSubmit={handleSubmit}>
+            <Input
+              classNames={{
+                base: "max-w-full m:max-w-[20rem] h-10",
+                mainWrapper: "h-full",
+                input: "text-small",
+                inputWrapper: "h-full font-normal text-default-200 bg-default-200/20 dark:bg-default-500/20"
+              }}
+              placeholder="Type to search..."
+              size="sm"
+              value={searchQuery}
+              onChange={handleChange}
+              type="search"
+              startContent={<SearchIcon size={18} />}
+            />
+          </form>
           <Dropdown placement="bottom-end">
-            <DropdownTrigger>
+          <DropdownTrigger>
               <Avatar
                 isBordered
                 as="button"

@@ -1,5 +1,5 @@
 "use client"
-import Nav from './components/Navbar/Navbar';
+
 import './globals.css'
 import NextUiProvider from "./providers/NextUiProvider";
 import { ContractProvider } from './Context/ContractContext';
@@ -13,7 +13,7 @@ export default function RootLayout({
      <body>
       <ContractProvider>
       <NextUiProvider> 
-        <Nav/>
+       
           {children}
       </NextUiProvider>
       </ContractProvider>
