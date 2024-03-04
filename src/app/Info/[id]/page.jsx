@@ -33,7 +33,7 @@ function InfoPage({params}) {
           <h2 className="text-2xl mb-3 font-bold text-red-600">
             {movie.title || movie.name}
           </h2>
-          <p className="text-xl mb-3">
+          <p className="text-xl mb-3  text-slate-200">
             <span className="font-semibold mr-1">Overview:</span>
             {movie.overview}
           </p>

@@ -1,11 +1,33 @@
 // Nav.jsx
 "use client"
-import React from "react";
+import React,{useState, useEffect} from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar } from "@nextui-org/react";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { SearchIcon } from "./SearchIcon.jsx";
-import ThemeSwitcher from "../ThemeSwitcherButton.jsx
+import ThemeSwitcher from "../ThemeSwitcherButton.jsx";
+
 export default function Nav() {
+  const[searchTerm, setSearchTerm] = useState('');
+  useEffect(() => {
+    function handleEnter(event) {
+      if (event.key === 'Enter') {
+        // Perform the search operation here
+        console.log(`Searching for ${searchTerm}`);
+        const url = 'https://api.themoviedb.org/3/find/external_id?external_source=&language=${searchTerm}';
+        const options = {method: 'GET', headers: {accept: 'application/json'}};
+        
+        fetch(url, options).then(res => res.json()).then(json => console.log(json))
+        .catch(err => console.error('error:' + err));
+      }
+    }
+
+    window.addEventListener('keydown', handleEnter);
+
+    // Cleanup function to remove the event listener
+    return () => {
+      window.removeEventListener('keydown', handleEnter);
+    };
+  }, [searchTerm]);
   return (
     <div className="absolute top-0 left-0 w-full z-10  ">
       <Navbar isBlurred="false" className="bg-transparent" > 
@@ -46,7 +68,8 @@ export default function Nav() {
             size="sm"
             startContent={<SearchIcon size={18} />}
             type="search"
-            
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
           />
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
