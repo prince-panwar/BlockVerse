@@ -5,6 +5,8 @@ import { useContract } from '@/app/Context/ContractContext';
 
 function InfoPage({params}) {
  const [movie, setMovie] = useState({});
+ const {connectWallet, currentUser, contractInstance} = useContract();
+ const [error,setError]=useState(false);
   useEffect(()=>{
     const movieId = params.id;
     async function getMovie(_movieId) {
@@ -17,10 +19,28 @@ function InfoPage({params}) {
      getMovie(movieId);
   },[])
   const contract=useContract();
-  const connect = async() =>{
-    contract?.connectWallet();
-    console.log("function connectWallet called");
+  const[isConnected, setIsConnected] = useState(false);
+  
+
+  const Buy = async() =>{
+    if(currentUser &&currentUser.length > 0){
+      console.log("insideif")
+      console.log(contractInstance)
+      try{
+        let buy = await contractInstance?.watchMovie(params.id);
+        setMessage("Claim Successfull")
+       }
+       catch(e){
+       setError(e.message);
+      
+       console.log(e);
+     }
+    }else{
+      connectWallet();
+    }
+  
   }
+  
    
   return (
     <div className="relative h-screen overflow-hidden font-serif">
@@ -49,12 +69,11 @@ function InfoPage({params}) {
             <span className="font-semibold mr-1">Price:</span>
             {movie.vote_count}
           </p>
-          <button onClick={connect}>Buy</button>
+         <button onClick={Buy}> Buy</button>
         </div>
       </div>
     </div>
   </div>
-  
   )
 }
 export default InfoPage;

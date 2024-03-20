@@ -1,6 +1,6 @@
 
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.19;
 
 contract Movie {
     mapping(address => mapping(uint32 => bool)) public movies;
@@ -12,7 +12,7 @@ contract Movie {
             return true;
         }
 
-        // Calculate the required payment
+        // Calculate the required payment 
         uint256 requiredPayment = uint256(_movieId) * 1 ether / 1000000;
 
         // Check if the payment is correct
