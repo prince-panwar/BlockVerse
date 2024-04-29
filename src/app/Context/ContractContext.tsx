@@ -4,7 +4,7 @@ import { ethers ,BrowserProvider,Eip1193Provider,Contract} from 'ethers';
 import detectEthereumProvider from '@metamask/detect-provider';
 import { MetaMaskInpageProvider } from "@metamask/providers"
 import { Maybe } from '@metamask/providers/dist/utils';
-import ContractAbi from '../../../../BlockVerse/artifacts/contracts/movies.sol/Movie.json'
+import ContractAbi from './abi.json';
 
 const ContractContext = createContext<ContractContextValue|undefined>(undefined);
 type ContractContextValue={
