@@ -10,6 +10,7 @@ const ContractContext = createContext<ContractContextValue|undefined>(undefined)
 type ContractContextValue={
     currentUser:string|undefined,
     contractInstance:Contract|undefined,
+    tokenInstance:Contract|undefined,
     connectWallet: () => {}
 }
 interface ContractProviderProps {
@@ -23,10 +24,11 @@ interface ContractProviderProps {
 
      export const ContractProvider:React.FC<ContractProviderProps> = ({ children }) => {
      const [contractInstance,setContractInstance] = useState<Contract|undefined>();
+     const [tokenInstance,setTokenInstance] = useState<Contract|undefined>();
      const [currentUser,setCurrentUser] = useState<string|undefined>(undefined);
    //  const [provider,setProvider] = useState<BrowserProvider|undefined>();
      const abi = ContractAbi.abi;
-     const contractAddress = "0x9B53067B5B57EaB03426433E8BFF8d176BB8b1f2";
+     const contractAddress = "0x5BBE5E74BcE3bE1B4D8D5848bfa1A89724b1A719";
      async function connectWallet(){
          if(typeof window !== "undefined"){  
            const ETHProvider:Eip1193Provider|null = await detectEthereumProvider();
@@ -39,6 +41,7 @@ interface ContractProviderProps {
              }
          }
       }
+
          
      const sendRequest =async(provider: ethers.BrowserProvider)=>{
 
@@ -51,6 +54,7 @@ interface ContractProviderProps {
              // getInstance();
              console.log("connect wallet called")
              getInstance(provider);
+             getTokenInstance(provider);
              }
            }catch(err:any){
            
@@ -86,11 +90,32 @@ interface ContractProviderProps {
            console.log(err.message);
          }
       }
+    const getTokenInstance = async(provider: ethers.BrowserProvider)=>{
+      const tokenAbi = [
+        {
+          constant: false,
+          inputs: [
+            { name: "_spender", type: "address" },
+            { name: "_value", type: "uint256" },
+          ],
+          name: "approve",
+          outputs: [],
+          payable: false,
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ];
 
+      const tokenAddress = "0x2a4c6394886502942d4Dd3d0Fd5E0B6245136f0d";
+      const signer = await provider.getSigner(); // Replace with your token address
+      const tokenInstance = new ethers.Contract(tokenAddress, tokenAbi,signer );
+      setTokenInstance(tokenInstance);
+      
+    }
     
     
       return (
-        <ContractContext.Provider value={{connectWallet, currentUser, contractInstance }}>
+        <ContractContext.Provider value={{connectWallet, currentUser, contractInstance,tokenInstance }}>
           {children}
         </ContractContext.Provider>
       );

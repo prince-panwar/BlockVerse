@@ -8,6 +8,7 @@ import type {
   FunctionFragment,
   Result,
   Interface,
+  EventFragment,
   AddressLike,
   ContractRunner,
   ContractMethod,
@@ -17,24 +18,65 @@ import type {
   TypedContractEvent,
   TypedDeferredTopicFilter,
   TypedEventLog,
+  TypedLogDescription,
   TypedListener,
   TypedContractMethod,
 } from "./common";
 
 export interface MovieInterface extends Interface {
-  getFunction(nameOrSignature: "movies" | "watchMovie"): FunctionFragment;
+  getFunction(
+    nameOrSignature:
+      | "hasPurchasedMovie"
+      | "movies"
+      | "setTokenAddress"
+      | "token"
+      | "watchMovie"
+  ): FunctionFragment;
 
+  getEvent(nameOrSignatureOrTopic: "MoviePurchased"): EventFragment;
+
+  encodeFunctionData(
+    functionFragment: "hasPurchasedMovie",
+    values: [AddressLike, BigNumberish]
+  ): string;
   encodeFunctionData(
     functionFragment: "movies",
     values: [AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "setTokenAddress",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(functionFragment: "token", values?: undefined): string;
+  encodeFunctionData(
     functionFragment: "watchMovie",
     values: [BigNumberish]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "hasPurchasedMovie",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "movies", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setTokenAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "token", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "watchMovie", data: BytesLike): Result;
+}
+
+export namespace MoviePurchasedEvent {
+  export type InputTuple = [buyer: AddressLike, movieId: BigNumberish];
+  export type OutputTuple = [buyer: string, movieId: bigint];
+  export interface OutputObject {
+    buyer: string;
+    movieId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
 }
 
 export interface Movie extends BaseContract {
@@ -80,22 +122,43 @@ export interface Movie extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  hasPurchasedMovie: TypedContractMethod<
+    [_user: AddressLike, _movieId: BigNumberish],
+    [boolean],
+    "view"
+  >;
+
   movies: TypedContractMethod<
     [arg0: AddressLike, arg1: BigNumberish],
     [boolean],
     "view"
   >;
 
+  setTokenAddress: TypedContractMethod<
+    [_tokenAddress: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  token: TypedContractMethod<[], [string], "view">;
+
   watchMovie: TypedContractMethod<
     [_movieId: BigNumberish],
     [boolean],
-    "payable"
+    "nonpayable"
   >;
 
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
 
+  getFunction(
+    nameOrSignature: "hasPurchasedMovie"
+  ): TypedContractMethod<
+    [_user: AddressLike, _movieId: BigNumberish],
+    [boolean],
+    "view"
+  >;
   getFunction(
     nameOrSignature: "movies"
   ): TypedContractMethod<
@@ -104,8 +167,33 @@ export interface Movie extends BaseContract {
     "view"
   >;
   getFunction(
+    nameOrSignature: "setTokenAddress"
+  ): TypedContractMethod<[_tokenAddress: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "token"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "watchMovie"
-  ): TypedContractMethod<[_movieId: BigNumberish], [boolean], "payable">;
+  ): TypedContractMethod<[_movieId: BigNumberish], [boolean], "nonpayable">;
 
-  filters: {};
+  getEvent(
+    key: "MoviePurchased"
+  ): TypedContractEvent<
+    MoviePurchasedEvent.InputTuple,
+    MoviePurchasedEvent.OutputTuple,
+    MoviePurchasedEvent.OutputObject
+  >;
+
+  filters: {
+    "MoviePurchased(address,uint32)": TypedContractEvent<
+      MoviePurchasedEvent.InputTuple,
+      MoviePurchasedEvent.OutputTuple,
+      MoviePurchasedEvent.OutputObject
+    >;
+    MoviePurchased: TypedContractEvent<
+      MoviePurchasedEvent.InputTuple,
+      MoviePurchasedEvent.OutputTuple,
+      MoviePurchasedEvent.OutputObject
+    >;
+  };
 }

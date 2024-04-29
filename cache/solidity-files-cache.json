@@ -1,9 +1,9 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "E:\\Blockchain\\PayPerView\\BlockVerse\\contracts\\movies.sol": {
-      "lastModificationDate": 1710925660762,
-      "contentHash": "6b3b7c74d3d68f351f3dfee9efee8f86",
+    "D:\\coding\\BlockChain\\BlockVerse\\contracts\\movies.sol": {
+      "lastModificationDate": 1713895270769,
+      "contentHash": "e21e6a9d0db7e7cfac6b95fae95d934a",
       "sourceName": "contracts/movies.sol",
       "solcConfig": {
         "version": "0.8.19",
@@ -33,6 +33,7 @@
         "^0.8.19"
       ],
       "artifacts": [
+        "IERC20",
         "Movie"
       ]
     }
