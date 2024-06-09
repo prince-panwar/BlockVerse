@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRouter } from 'next/Navigation';
+import { useRouter } from 'next/navigation';
 import {Card, CardHeader, CardBody, Image} from "@nextui-org/react";
 
 export default function VideoCard({id ,title,price,des,imageUrl}) {
