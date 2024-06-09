@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/navigationavigation';
+import { useRouter } from 'next/navigation';
 import { Spinner } from "@nextui-org/react";
 import VideoCard from "../Cards/VideoCard";
 
